@@ -1,6 +1,6 @@
 // Database & Default Data for Kazakhstani School Parliament Elections
 
-const APP_DATA_VERSION = "2.2";
+const APP_DATA_VERSION = "3.0";
 
 const DEFAULT_SETTINGS = {
     schoolNameRu: "Школьный Парламент",
@@ -31,7 +31,7 @@ const DEFAULT_CANDIDATES = [
         name: "Айзере Нургалиева",
         class: "10 'Б'",
         motto: "«Твое время, твой голос, наши совместные победы!»",
-        photo: "assets/candidate2.jpg",
+        photo: "assets/cand_kz_2.jpg?v=3.0",
         color: "#00A3E0",
         program: [
             "Зона релаксации и пуфы в библиотеке для комфортного отдыха",
@@ -46,7 +46,7 @@ const DEFAULT_CANDIDATES = [
         name: "Алихан Смагулов",
         class: "11 'А'",
         motto: "«Знания, Технологии и Справедливость — Школа Будущего!»",
-        photo: "assets/candidate1.jpg",
+        photo: "assets/cand_kz_1.jpg?v=3.0",
         color: "#E5B80B",
         program: [
             "Создание школьного IT-хаба и VR-лаборатории для учеников",
@@ -61,7 +61,7 @@ const DEFAULT_CANDIDATES = [
         name: "Амина Жумабекова",
         class: "11 'Б'",
         motto: "«Экология, Творчество и Поддержка каждого ученика!»",
-        photo: "assets/candidate3.jpg",
+        photo: "assets/cand_kz_3.jpg?v=3.0",
         color: "#10B981",
         program: [
             "Школьный эко-проект по раздельному сбору пластика и макулатуры",

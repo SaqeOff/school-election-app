@@ -145,9 +145,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Load App State
 function loadAppState() {
-    initDatabase();
-    if (localStorage.getItem("school_data_version") !== "2.1") {
+    if (localStorage.getItem("school_data_version") !== APP_DATA_VERSION) {
         initDatabase(true);
+    } else {
+        initDatabase();
     }
     candidates = JSON.parse(localStorage.getItem("school_candidates_db")) || [];
     students = JSON.parse(localStorage.getItem("school_students_db")) || [];

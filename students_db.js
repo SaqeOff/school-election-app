@@ -1,10 +1,10 @@
 // Database & Default Data for Kazakhstani School Parliament Elections
 
-const APP_DATA_VERSION = "2.1";
+const APP_DATA_VERSION = "2.2";
 
 const DEFAULT_SETTINGS = {
-    schoolNameRu: "КГУ «Школа-лицей № 1»",
-    schoolNameKk: "«№ 1 Мектеп-лицейі» КММ",
+    schoolNameRu: "Школьный Парламент",
+    schoolNameKk: "Мектеп Парламенті",
     verificationMode: "smart",
     adminLogin: "admin",
     adminPass: "admin123"

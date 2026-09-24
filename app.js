@@ -1,171 +1,206 @@
-// Main Application Logic for Kazakhstani School Election System
+// Main Application Logic for Kazakhstani School Election System 2026
 
-// Bilingual Translation Dictionary
+// Bilingual Dictionary
 const i18n = {
     ru: {
         appTitle: "Выборы Президента Школьного Парламента",
         schoolSub: "КГУ «ШКОЛА-ЛИЦЕЙ № 1» • АСТАНА / АЛМАТЫ",
-        navVote: "Голосование",
-        navResults: "Live Результаты",
-        navAdmin: "Панель Комиссии",
+        navMain: "Главная & График",
+        navRanking: "Рейтинг и Итоги",
+        navAdmin: "Панель Админа",
         
-        heroBadge: "⚡ ЧЕСТНЫЕ ШКОЛЬНЫЕ ВЫБОРЫ 2026",
+        heroBadge: "⚡ ОФИЦИАЛЬНОЕ ОНЛАЙН-ГОЛОСОВАНИЕ 2026",
         heroTitle: "Голосование за Президента Школьного Парламента",
-        heroSub: "Каждый голос имеет значение! Для участия пройдите быструю верификацию ученика. Защита от накруток гарантирует честный результат.",
+        heroSub: "Твой голос определяет будущее нашей школы! Посмотри программу кандидатов, следи за живым графиком голосов и сделай свой выбор.",
+        btnVoteNow: "Отдать свой голос",
+        btnViewLeaderboard: "Посмотреть рейтинг мест",
         
-        classSelectLbl: "Выберите ваш класс",
-        nameSelectLbl: "Введите ваши ФИО (Фамилия Имя)",
-        iinLbl: "Введитe Ваш ИИН (12 цифр)",
-        iinHint: "ИИН используется только для проверки факта 1 голоса. Голосование полностью анонимно.",
-        btnVerify: "Войти в кабину голосования ➔",
+        statTotalVoted: "Всего отдано голосов",
+        statTurnout: "Явка избирателей",
+        statLeader: "Текущий лидер (1-е место)",
         
-        demoBarTitle: "⚡ ДЕМО-УЧЕНИКИ (Нажмите для быстрого теста):",
+        chartTitle: "График голосов в реальном времени",
+        chartSub: "Динамика подсчета голосов кандидатов с автоматическим ранжированием мест",
+        liveStatus: "LIVE ПОДСЧЁТ",
         
-        errNotFound: "Ученик с такими данными не найден в школьном списке!",
-        errAlreadyVoted: "⚠️ Внимание! Вы уже приняли участие в голосовании. Повторный голос не допускается.",
-        errInvalidIIN: "ИИН должен состоять ровно из 12 цифр!",
+        candidatesTitle: "Кандидаты в Президенты",
+        candidatesSub: "Ознакомьтесь с предвыборной программой каждого кандидата и проголосуйте",
+        btnVoteFor: "Проголосовать",
         
-        voterWelcome: "Добро пожаловать,",
-        voterStatusBadge: "Верифицирован • Готов к выбору",
+        podiumBadge: "👑 ОФИЦИАЛЬНЫЙ РЕЙТИНГ МЕСТ",
+        podiumTitle: "Турнирная Таблица и Итоги Выборов",
+        podiumSub: "Распределение мест кандидатов в Президенты Школьного Парламента на основе полученных голосов.",
+        tableTitle: "Полный реестр результатов",
+        thRank: "Место",
+        thCandidate: "Кандидат",
+        thClass: "Класс",
+        thVotes: "Количество голосов",
+        thShare: "Доля голосов (%)",
+        thStatus: "Статус",
         
-        btnSelect: "Выбрать кандидата",
-        btnConfirmVote: "Да, подтвеждаю свой голос",
-        modalTitle: "Подтверждение выбора",
-        modalSub: "Вы уверены, что хотите отдать свой голос за данного кандидата? После подтверждения изменить выбор невозможно.",
+        adminLoginTitle: "Вход в Панель Администратора",
+        adminLoginSub: "Управление голосами, накрутка мест, кандидаты и база учеников",
+        adminUserLbl: "Логин",
+        adminPassLbl: "Пароль",
+        btnLogin: "Войти в панель управления ➔",
+        adminPanelTitle: "Панель Управления Выборами",
+        adminPanelSub: "Полный контроль над голосами, кандидатами и списками учеников",
+        
+        modalTitle: "Голосование за Кандидата",
+        modalSub: "Подтвердите ваш выбор и введите свои данные для однократной верификации.",
+        lblClass: "Выберите ваш класс",
+        lblName: "Введите ваши ФИО (Фамилия Имя)",
+        lblIin: "Введите Ваш ИИН (12 цифр)",
+        iinSecHint: "🔒 Защита от накрутки: 1 ИИН может проголосовать только один раз. Выбор строго анонимен.",
+        demoTitle: "⚡ ДЕМО-УЧЕНИКИ (Нажмите для быстрой проверки):",
         btnCancel: "Отмена",
+        btnSubmitVote: "✅ Отдать свой голос",
         
-        successTitle: "Ваш голос успешно учтен!",
-        successSub: "Спасибо за активное участие в жизни школы. Ваш вклад крайне важен для нашего Парламента.",
-        btnViewLive: "Смотреть результаты в реальном времени ➔",
+        succTitle: "Ваш голос успешно учтен!",
+        succSub: "Спасибо за участие в выборах! Ваш голос мгновенно обновлен в общем графике результатов.",
+        btnGoChart: "📊 Посмотреть обновленный график",
+        btnGoRanking: "🏆 Перейти в таблицу рейтинга",
         
-        resultsTitle: "Результаты голосования в реальном времени",
-        statTotalVoted: "Всего проголосовало",
-        statTurnout: "Явка учеников",
-        statLeader: "Текущий лидер",
-        
-        adminTitle: "Панель Администрации и Избирательной Комиссии",
-        adminLoginSub: "Введите пароль администратора (по умолчанию: admin123)",
-        adminPassLbl: "Пароль доступа",
-        btnLogin: "Войти в панель",
-        errWrongPass: "Неверный пароль администратора!",
-        
-        adminTabStudents: "База учеников",
-        adminTabCandidates: "Кандидаты",
-        adminTabActions: "Управление",
-        
-        btnResetVotes: "Сбросить все голоса",
-        btnExportCSV: "Скачать отчет (CSV)",
-        btnReloadDemo: "Восстановить Исходные Данные"
+        errInvalidIin: "ИИН должен состоять ровно из 12 цифр!",
+        errAlreadyVoted: "⚠️ Ошибка: Ученик с данным ИИН уже проголосовал! Повторное голосование невозможно.",
+        errEmptyFields: "Пожалуйста, заполните все поля формы!"
     },
     kk: {
         appTitle: "Мектеп Парламенті Президентін Сайлау",
         schoolSub: "«№ 1 МЕКТЕП-ЛИЦЕЙІ» КММ • АСТАНА / АЛМАТЫ",
-        navVote: "Дауыс беру",
-        navResults: "Live Нәтижелер",
-        navAdmin: "Комиссия панелі",
+        navMain: "Басты бет & График",
+        navRanking: "Рейтинг және Қорытынды",
+        navAdmin: "Әкімші Панелі",
         
-        heroBadge: "⚡ АДАТТЫ МЕКТЕП САЙЛАУЫ 2026",
+        heroBadge: "⚡ РЕСМИ ОНЛАЙН ДАУЫС БЕРУ 2026",
         heroTitle: "Мектеп Парламентінің Президентін Сайлау",
-        heroSub: "Әрбір дауыс маңызды! Қатысу үшін оқушыны верификациялаудан өтіңіз. Бұрмалаудан қорғау әділ нәтижеге кепілдік береді.",
+        heroSub: "Сенің дауысың мектебіміздің болашағын айқындайды! Кандидаттардың бағдарламасымен танысып, өз таңдауыңды жаса.",
+        btnVoteNow: "Өз дауысыңды беру",
+        btnViewLeaderboard: "Орындар рейтингін көру",
         
-        classSelectLbl: "Сыныбыңызды таңдаңыз",
-        nameSelectLbl: "Аты-жөніңізді енгізіңіз (Т.Ә.Ж.)",
-        iinLbl: "ЖСН енгізіңіз (12 сан)",
-        iinHint: "ЖСН тек 1 дауыс беру фактісін тексеру үшін қолданылады. Дауыс беру толық анонимді.",
-        btnVerify: "Дауыс беру кабинасына кіру ➔",
-        
-        demoBarTitle: "⚡ ДЕМО-ОҚУШЫЛАР (Снау үшін басыңыз):",
-        
-        errNotFound: "Мұндай деректері бар оқушы мектеп тізімінен табылмады!",
-        errAlreadyVoted: "⚠️ Назар аударыңыз! Сіз дауыс беріп қойдыңыз. Қайта дауыс беруге болмайды.",
-        errInvalidIIN: "ЖСН дәл 12 саннан тұруы керек!",
-        
-        voterWelcome: "Қош келдіңіз,",
-        voterStatusBadge: "Расталды • Таңдауға дайын",
-        
-        btnSelect: "Кандидатты таңдау",
-        btnConfirmVote: "Иә, дауысымды растаймын",
-        modalTitle: "Таңдауды растау",
-        modalSub: "Осы кандидатқа дауыс бергіңіз келетініне сенімдісіз бе? Растағаннан кейін таңдауды өзгерту мүмкін емес.",
-        btnCancel: "Бас тарту",
-        
-        successTitle: "Сіздің дауысыңыз сәтті есептелді!",
-        successSub: "Мектеп өміріне белсене қатысқаныңыз үшін рахмет. Сіздің үлесіңіз Парламент үшін өте маңызды.",
-        btnViewLive: "Нәтижелерді нақты уақытта көру ➔",
-        
-        resultsTitle: "Нақты уақыттағы дауыс беру нәтижелері",
         statTotalVoted: "Барлық дауыс бергендер",
-        statTurnout: "Оқушылардың қатысуы",
-        statLeader: "Қазіргі көшбасшы",
+        statTurnout: "Сайлаушылар қатысуы",
+        statLeader: "Қазіргі көшбасшы (1-орын)",
         
-        adminTitle: "Әкімшілік және Сайлау Комиссиясының Панелі",
-        adminLoginSub: "Әкімші құпия сөзін енгізіңіз (әдепкі бойынша: admin123)",
-        adminPassLbl: "Қолжетімділік құпия сөзі",
-        btnLogin: "Панельге кіру",
-        errWrongPass: "Әкімші құпия сөзі қате!",
+        chartTitle: "Нақты уақыттағы дауыстар графигі",
+        chartSub: "Орындарды автоматты түрде анықтайтын дауыстарды санау динамикасы",
+        liveStatus: "LIVE САНАУ",
         
-        adminTabStudents: "Оқушылар базасы",
-        adminTabCandidates: "Кандидаттар",
-        adminTabActions: "Басқару",
+        candidatesTitle: "Президенттікке Кандидаттар",
+        candidatesSub: "Әр кандидаттың сайлауалды бағдарламасымен танысып, дауыс беріңіз",
+        btnVoteFor: "Дауыс беру",
         
-        btnResetVotes: "Барлық дауыстарды нөлдеу",
-        btnExportCSV: "Есепті жүктеу (CSV)",
-        btnReloadDemo: "Бастапқы деректерді қалпына келтіру"
+        podiumBadge: "👑 РЕСМИ ОРЫНДАР РЕЙТИНГІ",
+        podiumTitle: "Турнирлік Кесте және Сайлау Қорытындысы",
+        podiumSub: "Мектеп Парламенті Президенттігіне үміткерлердің жинаған дауыстары бойынша орындарды бөлу.",
+        tableTitle: "Нәтижелердің толық тізілімі",
+        thRank: "Орын",
+        thCandidate: "Кандидат",
+        thClass: "Сынып",
+        thVotes: "Дауыстар саны",
+        thShare: "Дауыс үлесі (%)",
+        thStatus: "Мәртебесі",
+        
+        adminLoginTitle: "Әкімші Панеліне Кіру",
+        adminLoginSub: "Дауыстарды басқару, орындарды түзету, кандидаттар және оқушылар базасы",
+        adminUserLbl: "Логин",
+        adminPassLbl: "Құпия сөз",
+        btnLogin: "Басқару панеліне кіру ➔",
+        adminPanelTitle: "Сайлауды Басқару Панелі",
+        adminPanelSub: "Дауыстар, кандидаттар және оқушылар тізімін толық бақылау",
+        
+        modalTitle: "Кандидатқа Дауыс Беру",
+        modalSub: "Таңдауыңызды растап, бір реттік верификация үшін деректеріңізді енгізіңіз.",
+        lblClass: "Сыныбыңызды таңдаңыз",
+        lblName: "Аты-жөніңізді енгізіңіз (Т.Ә.Ж.)",
+        lblIin: "ЖСН енгізіңіз (12 сан)",
+        iinSecHint: "🔒 Бұрмалаудан қорғау: 1 ЖСН тек бір рет дауыс бере алады. Таңдау толық құпия.",
+        demoTitle: "⚡ ДЕМО-ОҚУШЫЛАР (Жылдам тексеру үшін басыңыз):",
+        btnCancel: "Бас тарту",
+        btnSubmitVote: "✅ Өз дауысымды беру",
+        
+        succTitle: "Сіздің дауысыңыз сәтті есептелді!",
+        succSub: "Сайлауға қатысқаныңызға рахмет! Сіздің дауысыңыз жалпы нәтижелер графигінде бірден жаңартылды.",
+        btnGoChart: "📊 Жаңартылған графикті көру",
+        btnGoRanking: "🏆 Рейтинг кестесіне өту",
+        
+        errInvalidIin: "ЖСН дәл 12 саннан тұруы керек!",
+        errAlreadyVoted: "⚠️ Қате: Бұл ЖСН бойынша оқушы дауыс беріп қойған! Қайта дауыс беруге болмайды.",
+        errEmptyFields: "Барлық өрістерді толтырыңыз!"
     }
 };
 
-// Global App State
+// Global State
 let currentLang = "ru";
-let studentsData = [];
-let candidatesData = [];
-let votesLogData = [];
-let currentVoter = null;
-let pendingCandidateId = null;
-let isAdminAuthenticated = false;
+let candidates = [];
+let students = [];
+let settings = {};
+let votesLog = [];
+let selectedCandidateId = null;
+let isAdminLoggedIn = false;
 
-// Initialize App
+// Initialize on page load
 document.addEventListener("DOMContentLoaded", () => {
-    loadDatabase();
-    setupEventListeners();
-    renderDemoChips();
-    applyLanguage(currentLang);
-    showView("verification");
+    loadAppState();
+    renderAll();
+    setupAdminLogin();
 });
 
-// Load data from LocalStorage
-function loadDatabase() {
-    studentsData = JSON.parse(localStorage.getItem("school_students_db")) || [];
-    candidatesData = JSON.parse(localStorage.getItem("school_candidates_db")) || [];
-    votesLogData = JSON.parse(localStorage.getItem("school_votes_log")) || [];
+// Load App State from LocalStorage
+function loadAppState() {
+    initDatabase(); // from students_db.js
+    candidates = JSON.parse(localStorage.getItem("school_candidates_db")) || [];
+    students = JSON.parse(localStorage.getItem("school_students_db")) || [];
+    settings = JSON.parse(localStorage.getItem("school_settings")) || {};
+    votesLog = JSON.parse(localStorage.getItem("school_votes_log")) || [];
+    
+    // Ensure we have realistic candidate data
+    if (candidates.length < 4) {
+        initDatabase(true);
+        candidates = JSON.parse(localStorage.getItem("school_candidates_db")) || [];
+        students = JSON.parse(localStorage.getItem("school_students_db")) || [];
+    }
 }
 
-function saveDatabase() {
-    localStorage.setItem("school_students_db", JSON.stringify(studentsData));
-    localStorage.setItem("school_candidates_db", JSON.stringify(candidatesData));
-    localStorage.setItem("school_votes_log", JSON.stringify(votesLogData));
+function saveAppState() {
+    localStorage.setItem("school_candidates_db", JSON.stringify(candidates));
+    localStorage.setItem("school_students_db", JSON.stringify(students));
+    localStorage.setItem("school_settings", JSON.stringify(settings));
+    localStorage.setItem("school_votes_log", JSON.stringify(votesLog));
 }
 
-// Switch Languages
-function applyLanguage(lang) {
+// Render everything
+function renderAll() {
+    renderStatsAndChart();
+    renderCandidateCards();
+    renderPodiumAndRanking();
+    renderDemoChips();
+    if (isAdminLoggedIn) {
+        renderAdminVotesControl();
+        renderAdminCandidatesList();
+        renderAdminStudentsTable();
+    }
+}
+
+// Language Switching
+function changeLanguage(lang) {
     currentLang = lang;
     document.querySelectorAll("[data-i18n]").forEach(elem => {
         const key = elem.getAttribute("data-i18n");
         if (i18n[lang][key]) {
-            if (elem.tagName === "INPUT" && elem.type === "placeholder") {
-                elem.placeholder = i18n[lang][key];
-            } else {
-                elem.innerText = i18n[lang][key];
-            }
+            elem.innerText = i18n[lang][key];
         }
     });
 
-    document.querySelectorAll(".btn-lang").forEach(b => {
-        b.classList.toggle("active", b.dataset.lang === lang);
+    document.querySelectorAll(".btn-lang").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.lang === lang);
     });
+
+    renderAll();
 }
 
-// Navigation & View Switching
-function showView(viewId) {
+// Navigation / View Switching
+function switchView(viewId) {
     document.querySelectorAll(".view-section").forEach(sec => sec.classList.remove("active"));
     const target = document.getElementById(`view-${viewId}`);
     if (target) {
@@ -176,145 +211,112 @@ function showView(viewId) {
         btn.classList.toggle("active", btn.dataset.view === viewId);
     });
 
-    if (viewId === "results") {
-        renderLiveResults();
-    } else if (viewId === "admin" && isAdminAuthenticated) {
-        renderAdminDashboard();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (viewId === "main") {
+        renderStatsAndChart();
+        renderCandidateCards();
+    } else if (viewId === "ranking") {
+        renderPodiumAndRanking();
+    } else if (viewId === "admin") {
+        if (isAdminLoggedIn) {
+            document.getElementById("admin-login-box").style.display = "none";
+            document.getElementById("admin-content-box").style.display = "block";
+            renderAdminVotesControl();
+            renderAdminCandidatesList();
+            renderAdminStudentsTable();
+        } else {
+            document.getElementById("admin-login-box").style.display = "block";
+            document.getElementById("admin-content-box").style.display = "none";
+        }
     }
 }
 
-// Setup Event Listeners
-function setupEventListeners() {
-    // Language buttons
-    document.querySelectorAll(".btn-lang").forEach(btn => {
-        btn.addEventListener("click", () => applyLanguage(btn.dataset.lang));
+// ==================== STATS & LIVE CHART RENDERING ====================
+function renderStatsAndChart() {
+    const totalVotes = candidates.reduce((sum, c) => sum + (Number(c.votes) || 0), 0);
+    const totalStudents = Math.max(students.length, 480);
+    const turnout = totalStudents > 0 ? ((totalVotes / totalStudents) * 100).toFixed(1) : 0;
+
+    // Sort candidates descending by votes
+    const sorted = [...candidates].sort((a, b) => (b.votes || 0) - (a.votes || 0));
+    const leader = sorted[0];
+
+    document.getElementById("stat-total-votes").innerText = totalVotes;
+    document.getElementById("stat-turnout").innerText = `${turnout}%`;
+    document.getElementById("stat-leader-name").innerText = leader ? leader.name : "-";
+
+    // Chart list
+    const container = document.getElementById("chart-bars-container");
+    container.innerHTML = "";
+
+    sorted.forEach((cand, index) => {
+        const votes = Number(cand.votes) || 0;
+        const percent = totalVotes > 0 ? ((votes / totalVotes) * 100).toFixed(1) : 0;
+        const isWinner = index === 0 && votes > 0;
+        const rankMedal = index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : `${index + 1}`;
+
+        const barItem = document.createElement("div");
+        barItem.className = `chart-bar-item ${isWinner ? 'winner' : ''}`;
+        barItem.innerHTML = `
+            <div class="bar-meta">
+                <div class="bar-candidate-info">
+                    <div class="bar-rank-badge">${rankMedal}</div>
+                    <img src="${cand.photo}" alt="${cand.name}" class="bar-avatar">
+                    <div>
+                        <div class="bar-cand-name">${cand.name} ${isWinner ? '<span style="color:var(--gold); font-size:0.8rem; margin-left:6px;">👑 ЛИДЕР</span>' : ''}</div>
+                        <div class="bar-cand-class">${cand.class} класс</div>
+                    </div>
+                </div>
+                <div class="bar-stats">
+                    <div class="bar-votes-count">${votes} ${currentLang === 'kk' ? 'дауыс' : 'голосов'}</div>
+                    <div class="bar-percent">${percent}%</div>
+                </div>
+            </div>
+            <div class="bar-track">
+                <div class="bar-fill" style="width: ${percent}%;"></div>
+            </div>
+        `;
+        container.appendChild(barItem);
     });
-
-    // Navigation buttons
-    document.querySelectorAll(".btn-nav").forEach(btn => {
-        btn.addEventListener("click", () => {
-            const view = btn.dataset.view;
-            if (view === "admin" && !isAdminAuthenticated) {
-                document.getElementById("admin-login-box").style.display = "block";
-                document.getElementById("admin-content-box").style.display = "none";
-            }
-            showView(view);
-        });
-    });
-
-    // Student Verification Form Submit
-    const verifyForm = document.getElementById("verification-form");
-    if (verifyForm) {
-        verifyForm.addEventListener("submit", handleStudentVerification);
-    }
-
-    // Modal Confirmation Actions
-    document.getElementById("btn-confirm-modal").addEventListener("click", executeVote);
-    document.getElementById("btn-cancel-modal").addEventListener("click", closeModal);
-
-    // Admin Login Form
-    document.getElementById("admin-login-form").addEventListener("submit", handleAdminLogin);
-    
-    // Admin Action Buttons
-    document.getElementById("btn-reset-votes").addEventListener("click", resetAllVotes);
-    document.getElementById("btn-export-csv").addEventListener("click", exportVotesCSV);
-    document.getElementById("btn-restore-demo").addEventListener("click", restoreDemoData);
 }
 
-// Render Demo Student Chips for Easy Testing
-function renderDemoChips() {
-    const chipsContainer = document.getElementById("demo-chips-container");
-    if (!chipsContainer) return;
-    
-    chipsContainer.innerHTML = "";
-    // Pick 4 students (some voted, some not voted)
-    studentsData.slice(0, 4).forEach(st => {
-        const chip = document.createElement("button");
-        chip.className = "demo-chip";
-        chip.type = "button";
-        chip.innerHTML = `${st.fullName} (${st.class}) ${st.hasVoted ? '✓' : ''}`;
-        chip.addEventListener("click", () => {
-            document.getElementById("select-class").value = st.class;
-            document.getElementById("input-fullname").value = st.fullName;
-            document.getElementById("input-iin").value = st.iin;
-        });
-        chipsContainer.appendChild(chip);
-    });
-}
-
-// Handle Verification
-function handleStudentVerification(e) {
-    e.preventDefault();
-    const alertBox = document.getElementById("verify-alert");
-    alertBox.style.display = "none";
-
-    const selClass = document.getElementById("select-class").value;
-    const inputName = document.getElementById("input-fullname").value.trim();
-    const inputIIN = document.getElementById("input-iin").value.trim();
-
-    // Check IIN format
-    if (!/^\d{12}$/.test(inputIIN)) {
-        showAlert(alertBox, i18n[currentLang].errInvalidIIN, "danger");
-        return;
-    }
-
-    // Lookup in DB
-    const student = studentsData.find(s => 
-        s.class === selClass &&
-        s.iin === inputIIN
-    );
-
-    if (!student) {
-        showAlert(alertBox, i18n[currentLang].errNotFound, "danger");
-        return;
-    }
-
-    // Anti-cheating check: check if student has already voted
-    if (student.hasVoted) {
-        showAlert(alertBox, i18n[currentLang].errAlreadyVoted, "danger");
-        return;
-    }
-
-    // Success verification
-    currentVoter = student;
-    renderVotingBooth();
-    showView("voting");
-}
-
-function showAlert(elem, msg, type = "danger") {
-    elem.className = `alert alert-${type}`;
-    elem.innerText = msg;
-    elem.style.display = "block";
-}
-
-// Render Candidates Grid in Voting Booth
-function renderVotingBooth() {
-    const bannerName = document.getElementById("voter-banner-name");
-    const bannerClass = document.getElementById("voter-banner-class");
-    if (bannerName) bannerName.innerText = currentVoter.fullName;
-    if (bannerClass) bannerClass.innerText = `Класс: ${currentVoter.class}`;
-
-    const grid = document.getElementById("candidates-grid");
+// ==================== CANDIDATE CARDS RENDERING ====================
+function renderCandidateCards() {
+    const grid = document.getElementById("candidates-cards-grid");
     grid.innerHTML = "";
 
-    candidatesData.forEach(cand => {
+    // Sort to determine ranks
+    const sorted = [...candidates].sort((a, b) => (b.votes || 0) - (a.votes || 0));
+
+    sorted.forEach(cand => {
+        const rankIndex = sorted.findIndex(c => c.id === cand.id);
+        const rankText = rankIndex === 0 ? "🥇 1 МЕСТО / ЛИДЕР" : rankIndex === 1 ? "🥈 2 МЕСТО" : rankIndex === 2 ? "🥉 3 МЕСТО" : `${rankIndex + 1} МЕСТО`;
+        const isGold = rankIndex === 0;
+
         const card = document.createElement("div");
-        card.className = "candidate-card";
-        
+        card.className = `candidate-card ${isGold ? 'first-place' : ''}`;
         card.innerHTML = `
-            <div class="candidate-photo-wrapper">
+            <div class="candidate-photo-box">
                 <img src="${cand.photo}" alt="${cand.name}" class="candidate-photo">
-                <span class="candidate-badge-class">${cand.class}</span>
+                <div class="card-rank-tag ${isGold ? 'gold' : ''}">${rankText}</div>
+                <div class="card-class-tag">${cand.class}</div>
             </div>
-            <div class="candidate-body">
-                <h3 class="candidate-name">${cand.name}</h3>
-                <p class="candidate-motto">${cand.motto}</p>
-                <div class="candidate-program-title">Предвыборные тезисы:</div>
-                <ul class="candidate-program-list">
+            <div class="candidate-content">
+                <h3 class="cand-name-title">${cand.name}</h3>
+                <p class="cand-motto-text">${cand.motto}</p>
+                <div class="cand-program-label">Ключевые пункты программы:</div>
+                <ul class="cand-program-list">
                     ${cand.program.map(p => `<li>${p}</li>`).join("")}
                 </ul>
-                <button class="btn-vote" onclick="promptVoteConfirm('${cand.id}')">
-                    ${i18n[currentLang].btnSelect}
+                <div class="card-votes-preview">
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">Текущие голоса:</span>
+                    <strong style="color: ${isGold ? 'var(--gold)' : 'var(--primary-light)'}; font-size: 1.1rem;">
+                        ${cand.votes}
+                    </strong>
+                </div>
+                <button class="btn-vote-trigger" onclick="openVoteModalFor('${cand.id}')">
+                    🗳️ ${i18n[currentLang].btnVoteFor}
                 </button>
             </div>
         `;
@@ -322,123 +324,413 @@ function renderVotingBooth() {
     });
 }
 
-// Modal Vote Confirmation
-function promptVoteConfirm(candidateId) {
-    pendingCandidateId = candidateId;
-    const cand = candidatesData.find(c => c.id === candidateId);
-    
+// ==================== DEDICATED RANKING (PODIUM & TABLE) ====================
+function renderPodiumAndRanking() {
+    const sorted = [...candidates].sort((a, b) => (b.votes || 0) - (a.votes || 0));
+    const totalVotes = candidates.reduce((sum, c) => sum + (Number(c.votes) || 0), 0);
+
+    const podium = document.getElementById("podium-container");
+    podium.innerHTML = "";
+
+    // Podium order: 2nd place (left), 1st place (center), 3rd place (right)
+    const top3 = [sorted[1], sorted[0], sorted[2]];
+
+    top3.forEach((cand, idx) => {
+        if (!cand) return;
+        const actualRank = cand.id === sorted[0]?.id ? 1 : cand.id === sorted[1]?.id ? 2 : 3;
+        const rankClass = `rank-${actualRank}`;
+        const medal = actualRank === 1 ? "🥇" : actualRank === 2 ? "🥈" : "🥉";
+        const label = actualRank === 1 ? "1 МЕСТО • ПРЕЗИДЕНТ" : `${actualRank} МЕСТО`;
+
+        const slot = document.createElement("div");
+        slot.className = `podium-slot ${rankClass}`;
+        slot.innerHTML = `
+            <div class="podium-avatar-wrap">
+                ${actualRank === 1 ? '<div class="podium-crown">👑</div>' : ''}
+                <img src="${cand.photo}" alt="${cand.name}" class="podium-avatar">
+            </div>
+            <div class="podium-cand-name">${cand.name}</div>
+            <div class="podium-cand-votes">${cand.votes} ${currentLang === 'kk' ? 'дауыс' : 'голосов'}</div>
+            <div class="podium-pillar">
+                <div class="pillar-number">${medal}</div>
+                <div class="pillar-label">${label}</div>
+            </div>
+        `;
+        podium.appendChild(slot);
+    });
+
+    // Table rows
+    const tbody = document.getElementById("ranking-table-tbody");
+    tbody.innerHTML = "";
+
+    sorted.forEach((cand, index) => {
+        const votes = Number(cand.votes) || 0;
+        const percent = totalVotes > 0 ? ((votes / totalVotes) * 100).toFixed(1) : 0;
+        const rankBadgeClass = index === 0 ? "r-1" : index === 1 ? "r-2" : index === 2 ? "r-3" : "";
+        const statusText = index === 0 ? "👑 Победитель (Президент)" : index < 3 ? "🥈 Призёр" : "Участник";
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td><span class="rank-badge-col ${rankBadgeClass}">${index + 1}</span></td>
+            <td>
+                <div class="cand-cell">
+                    <img src="${cand.photo}" alt="${cand.name}" class="table-cand-avatar">
+                    <div>
+                        <strong>${cand.name}</strong>
+                        <div style="font-size: 0.78rem; color: var(--text-muted);">${cand.motto}</div>
+                    </div>
+                </div>
+            </td>
+            <td><strong>${cand.class}</strong></td>
+            <td><strong style="font-size: 1.15rem; color: ${index === 0 ? 'var(--gold)' : 'var(--primary-light)'};">${votes}</strong></td>
+            <td>
+                <div style="font-weight: 700; margin-bottom: 4px;">${percent}%</div>
+                <div class="bar-track" style="height: 6px; width: 100px;">
+                    <div class="bar-fill" style="width: ${percent}%;"></div>
+                </div>
+            </td>
+            <td>
+                <span class="badge-status ${index === 0 ? 'badge-voted' : 'badge-not-voted'}" style="${index === 0 ? 'background:rgba(229,184,11,0.2); color:var(--gold); border:1px solid var(--gold);' : ''}">
+                    ${statusText}
+                </span>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+// ==================== VOTE MODAL & VERIFICATION ====================
+function openVoteModalFor(candidateId) {
+    selectedCandidateId = candidateId;
+    const cand = candidates.find(c => c.id === candidateId);
+    if (!cand) return;
+
+    document.getElementById("modal-cand-img").src = cand.photo;
     document.getElementById("modal-cand-name").innerText = cand.name;
-    document.getElementById("modal-cand-class").innerText = cand.class;
+    document.getElementById("modal-cand-class").innerText = `${cand.class} класс`;
+
+    const alertBox = document.getElementById("vote-modal-alert");
+    alertBox.style.display = "none";
+
     document.getElementById("vote-modal").classList.add("active");
 }
 
-function closeModal() {
-    document.getElementById("vote-modal").classList.remove("active");
-    pendingCandidateId = null;
+function openVoteModal() {
+    // Select leader or first candidate by default
+    const sorted = [...candidates].sort((a, b) => (b.votes || 0) - (a.votes || 0));
+    openVoteModalFor(sorted[0]?.id || candidates[0]?.id);
 }
 
-// Execute Vote (Record and Save)
-function executeVote() {
-    if (!currentVoter || !pendingCandidateId) return;
+function closeVoteModal() {
+    document.getElementById("vote-modal").classList.remove("active");
+    selectedCandidateId = null;
+}
 
-    // 1. Mark student as voted
-    const studentInDb = studentsData.find(s => s.id === currentVoter.id);
-    if (studentInDb) {
-        studentInDb.hasVoted = true;
+// Render Demo Chips in Vote Modal
+function renderDemoChips() {
+    const container = document.getElementById("vote-demo-chips");
+    if (!container) return;
+    container.innerHTML = "";
+
+    // Show 4 students
+    students.slice(0, 4).forEach(st => {
+        const chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = "demo-chip";
+        chip.innerHTML = `${st.fullName.split(' ')[0]} ${st.fullName.split(' ')[1]} (${st.class}) ${st.hasVoted ? '✓' : ''}`;
+        chip.onclick = () => {
+            document.getElementById("vote-input-class").value = st.class;
+            document.getElementById("vote-input-name").value = st.fullName;
+            document.getElementById("vote-input-iin").value = st.iin;
+        };
+        container.appendChild(chip);
+    });
+}
+
+// Cast Vote Action (Verification + Anti-fraud)
+function handleCastVote(e) {
+    e.preventDefault();
+    const alertBox = document.getElementById("vote-modal-alert");
+    alertBox.style.display = "none";
+
+    const vClass = document.getElementById("vote-input-class").value.trim();
+    const vName = document.getElementById("vote-input-name").value.trim();
+    const vIin = document.getElementById("vote-input-iin").value.trim();
+
+    if (!vClass || !vName || !vIin) {
+        showModalAlert(alertBox, i18n[currentLang].errEmptyFields);
+        return;
     }
 
-    // 2. Add vote count to candidate
-    const cand = candidatesData.find(c => c.id === pendingCandidateId);
-    if (cand) {
-        cand.votes += 1;
+    if (!/^\d{12}$/.test(vIin)) {
+        showModalAlert(alertBox, i18n[currentLang].errInvalidIin);
+        return;
     }
 
-    // 3. Add entry to audit log
-    votesLogData.push({
+    // Anti-fraud check: Check if student with this IIN has already voted!
+    const existingStudent = students.find(s => s.iin === vIin);
+    if (existingStudent && existingStudent.hasVoted) {
+        showModalAlert(alertBox, i18n[currentLang].errAlreadyVoted);
+        return;
+    }
+
+    // Verification passed: Record Vote
+    if (existingStudent) {
+        existingStudent.hasVoted = true;
+        existingStudent.votedFor = selectedCandidateId;
+    } else {
+        // Smart registration: record new voter so duplicate IIN is impossible
+        students.push({
+            id: students.length + 1,
+            class: vClass,
+            fullName: vName,
+            iin: vIin,
+            hasVoted: true,
+            votedFor: selectedCandidateId
+        });
+    }
+
+    // Increment vote count for candidate
+    const targetCand = candidates.find(c => c.id === selectedCandidateId);
+    if (targetCand) {
+        targetCand.votes = (Number(targetCand.votes) || 0) + 1;
+    }
+
+    // Log action
+    votesLog.push({
         id: "VOTE_" + Date.now(),
         timestamp: new Date().toISOString(),
-        voterClass: currentVoter.class,
-        candidateId: pendingCandidateId,
-        candidateName: cand.name
+        iinMasked: vIin.substring(0, 4) + "****" + vIin.substring(8),
+        class: vClass,
+        candidateId: selectedCandidateId,
+        candidateName: targetCand ? targetCand.name : ""
     });
 
-    saveDatabase();
-    closeModal();
-    renderDemoChips();
-    showView("success");
+    saveAppState();
+    closeVoteModal();
+    renderAll();
+
+    // Show celebratory success modal
+    document.getElementById("success-modal").classList.add("active");
 }
 
-// Live Results View Rendering
-function renderLiveResults() {
-    loadDatabase();
-    
-    const totalVotes = candidatesData.reduce((sum, c) => sum + c.votes, 0);
-    const totalStudents = studentsData.length;
-    const turnoutPercent = totalStudents > 0 ? ((totalVotes / totalStudents) * 100).toFixed(1) : 0;
-
-    // Sort candidates by votes descending
-    const sortedCandidates = [...candidatesData].sort((a, b) => b.votes - a.votes);
-    const leader = sortedCandidates[0];
-
-    // Stats
-    document.getElementById("stat-total-votes").innerText = totalVotes;
-    document.getElementById("stat-turnout").innerText = `${turnoutPercent}%`;
-    document.getElementById("stat-leader-name").innerText = leader ? leader.name : "-";
-
-    // Results List
-    const resultsContainer = document.getElementById("results-list-container");
-    resultsContainer.innerHTML = "";
-
-    sortedCandidates.forEach((cand, index) => {
-        const percent = totalVotes > 0 ? ((cand.votes / totalVotes) * 100).toFixed(1) : 0;
-        const isWinner = index === 0 && cand.votes > 0;
-
-        const item = document.createElement("div");
-        item.className = `result-item-card ${isWinner ? 'winner' : ''}`;
-        
-        item.innerHTML = `
-            ${isWinner ? `<div class="winner-crown-badge">👑 КӨШБАСШЫ / ЛИДЕР</div>` : ''}
-            <div class="result-item-header">
-                <img src="${cand.photo}" alt="${cand.name}" class="result-avatar">
-                <div class="result-cand-info">
-                    <h3>${index + 1}. ${cand.name}</h3>
-                    <p>Класс: ${cand.class}</p>
-                </div>
-                <div class="result-votes-count">
-                    <div class="result-votes-num">${cand.votes} голосов</div>
-                    <div class="result-percent-badge">${percent}%</div>
-                </div>
-            </div>
-            <div class="progress-bar-track">
-                <div class="progress-bar-fill" style="width: ${percent}%;"></div>
-            </div>
-        `;
-        resultsContainer.appendChild(item);
-    });
+function showModalAlert(elem, msg) {
+    elem.innerText = msg;
+    elem.style.display = "block";
 }
 
-// Admin Dashboard Authentication & Handlers
-function handleAdminLogin(e) {
-    e.preventDefault();
-    const pass = document.getElementById("input-admin-pass").value;
-    if (pass === "admin123") {
-        isAdminAuthenticated = true;
-        document.getElementById("admin-login-box").style.display = "none";
-        document.getElementById("admin-content-box").style.display = "block";
-        renderAdminDashboard();
-    } else {
-        alert(i18n[currentLang].errWrongPass);
+function closeSuccessAndShowMain() {
+    document.getElementById("success-modal").classList.remove("active");
+    switchView("main");
+}
+
+function closeSuccessAndShowRanking() {
+    document.getElementById("success-modal").classList.remove("active");
+    switchView("ranking");
+}
+
+// ==================== ADMIN PANEL FUNCTIONS ====================
+function setupAdminLogin() {
+    const form = document.getElementById("admin-login-form");
+    if (form) {
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const user = document.getElementById("input-admin-user").value.trim();
+            const pass = document.getElementById("input-admin-pass").value.trim();
+            const alertBox = document.getElementById("admin-login-alert");
+
+            if (user === (settings.adminLogin || "admin") && pass === (settings.adminPass || "admin123")) {
+                isAdminLoggedIn = true;
+                alertBox.style.display = "none";
+                document.getElementById("admin-login-box").style.display = "none";
+                document.getElementById("admin-content-box").style.display = "block";
+                renderAdminVotesControl();
+                renderAdminCandidatesList();
+                renderAdminStudentsTable();
+            } else {
+                alertBox.innerText = "Неверный логин или пароль администратора!";
+                alertBox.style.display = "block";
+            }
+        });
     }
 }
 
-function renderAdminDashboard() {
+function logoutAdmin() {
+    isAdminLoggedIn = false;
+    document.getElementById("admin-login-box").style.display = "block";
+    document.getElementById("admin-content-box").style.display = "none";
+}
+
+function switchAdminTab(tabName) {
+    document.querySelectorAll(".btn-admin-tab").forEach(b => {
+        b.classList.toggle("active", b.dataset.admTab === tabName);
+    });
+
+    document.querySelectorAll(".admin-tab-pane").forEach(p => p.style.display = "none");
+    const pane = document.getElementById(`adm-tab-${tabName}`);
+    if (pane) pane.style.display = "block";
+}
+
+// Render Admin Votes Control Rows (Easy vote boosting / ranking)
+function renderAdminVotesControl() {
+    const container = document.getElementById("admin-votes-control-list");
+    container.innerHTML = "";
+
+    candidates.forEach(cand => {
+        const row = document.createElement("div");
+        row.className = "vote-control-row";
+        row.innerHTML = `
+            <div class="cand-admin-info">
+                <img src="${cand.photo}" alt="${cand.name}" class="cand-admin-avatar">
+                <div>
+                    <strong>${cand.name}</strong>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">${cand.class} класс</div>
+                </div>
+            </div>
+            <div class="vote-adjusters">
+                <input type="number" id="adm-vote-${cand.id}" class="vote-input-val" value="${cand.votes}" min="0">
+                <button type="button" class="btn-quick-vote" onclick="adjustAdminVote('${cand.id}', 10)">+10</button>
+                <button type="button" class="btn-quick-vote" onclick="adjustAdminVote('${cand.id}', 50)">+50</button>
+                <button type="button" class="btn-quick-vote" onclick="adjustAdminVote('${cand.id}', -10)">-10</button>
+                <button type="button" class="btn-make-leader" onclick="makeCandidateLeader('${cand.id}')">👑 Сделать 1-м</button>
+            </div>
+        `;
+        container.appendChild(row);
+    });
+}
+
+function adjustAdminVote(candId, delta) {
+    const input = document.getElementById(`adm-vote-${candId}`);
+    if (input) {
+        input.value = Math.max(0, (parseInt(input.value) || 0) + delta);
+    }
+}
+
+function makeCandidateLeader(candId) {
+    let maxVotes = 0;
+    candidates.forEach(c => {
+        const input = document.getElementById(`adm-vote-${c.id}`);
+        const val = input ? parseInt(input.value) : c.votes;
+        if (val > maxVotes) maxVotes = val;
+    });
+
+    const targetInput = document.getElementById(`adm-vote-${candId}`);
+    if (targetInput) {
+        targetInput.value = maxVotes + 35; // Put ahead by 35 votes!
+        saveAllAdminVotes();
+        alert(`Кандидат выведен на 1-е место с ${targetInput.value} голосами!`);
+    }
+}
+
+function saveAllAdminVotes() {
+    candidates.forEach(c => {
+        const input = document.getElementById(`adm-vote-${c.id}`);
+        if (input) {
+            c.votes = Math.max(0, parseInt(input.value) || 0);
+        }
+    });
+
+    saveAppState();
+    renderAll();
+    alert("Все голоса и расстановка мест успешно сохранены!");
+}
+
+// Preset Rankings (168, 114, 76, 42)
+function applyPresetRankings() {
+    const presets = [168, 114, 76, 42, 25, 15];
+    candidates.forEach((c, idx) => {
+        c.votes = presets[idx] || 10;
+        const input = document.getElementById(`adm-vote-${c.id}`);
+        if (input) input.value = c.votes;
+    });
+
+    saveAppState();
+    renderAll();
+    alert("Применен идеальный пресет мест (1-е место: 168, 2-е место: 114, 3-е место: 76, 4-е место: 42)!");
+}
+
+function resetAllVotesToZero() {
+    if (confirm("Вы уверены, что хотите обнулить все голоса до 0?")) {
+        candidates.forEach(c => c.votes = 0);
+        students.forEach(s => s.hasVoted = false);
+        votesLog = [];
+        saveAppState();
+        renderAll();
+        alert("Все голоса сброшены до 0!");
+    }
+}
+
+// Render Admin Candidates List (Edit / Delete)
+function renderAdminCandidatesList() {
+    const container = document.getElementById("admin-candidates-list");
+    container.innerHTML = "";
+
+    candidates.forEach(cand => {
+        const div = document.createElement("div");
+        div.className = "vote-control-row";
+        div.innerHTML = `
+            <div class="cand-admin-info">
+                <img src="${cand.photo}" alt="${cand.name}" class="cand-admin-avatar">
+                <div>
+                    <strong>${cand.name}</strong> (${cand.class})
+                    <div style="font-size: 0.78rem; color: var(--text-muted);">${cand.motto}</div>
+                </div>
+            </div>
+            <div>
+                <button class="btn-secondary" style="border-color: var(--error); color: #FCA5A5; font-size: 0.8rem; padding: 6px 12px;" onclick="deleteCandidate('${cand.id}')">
+                    Удалить
+                </button>
+            </div>
+        `;
+        container.appendChild(div);
+    });
+}
+
+function handleAddNewCandidate(e) {
+    e.preventDefault();
+    const name = document.getElementById("new-cand-name").value.trim();
+    const cClass = document.getElementById("new-cand-class").value.trim();
+    const votes = parseInt(document.getElementById("new-cand-votes").value) || 0;
+    const photo = document.getElementById("new-cand-photo").value.trim() || "assets/candidate1.jpg";
+    const motto = document.getElementById("new-cand-motto").value.trim();
+    const programRaw = document.getElementById("new-cand-program").value.trim();
+
+    const program = programRaw.split("\n").map(l => l.trim()).filter(l => l.length > 0);
+
+    const newCand = {
+        id: "cand_" + Date.now(),
+        name: name,
+        class: cClass,
+        motto: motto,
+        photo: photo,
+        program: program.length > 0 ? program : ["Активное участие в жизни школы"],
+        votes: votes
+    };
+
+    candidates.push(newCand);
+    saveAppState();
+    renderAll();
+    document.getElementById("form-add-candidate").reset();
+    alert(`Кандидат "${name}" успешно добавлен!`);
+}
+
+function deleteCandidate(candId) {
+    if (confirm("Удалить данного кандидата?")) {
+        candidates = candidates.filter(c => c.id !== candId);
+        saveAppState();
+        renderAll();
+    }
+}
+
+// Render Admin Students Table
+function renderAdminStudentsTable() {
     const tbody = document.getElementById("admin-students-tbody");
     tbody.innerHTML = "";
 
-    studentsData.forEach(st => {
+    students.forEach((st, idx) => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
-            <td>${st.id}</td>
+            <td>${st.id || idx + 1}</td>
             <td><strong>${st.class}</strong></td>
             <td>${st.fullName}</td>
             <td><code>${st.iin}</code></td>
@@ -447,28 +739,28 @@ function renderAdminDashboard() {
                     ${st.hasVoted ? 'Проголосовал ✓' : 'Не голосовал'}
                 </span>
             </td>
+            <td>
+                ${st.hasVoted ? `<button class="btn-quick-vote" onclick="resetStudentVote('${st.iin}')">Сбросить статус</button>` : '-'}
+            </td>
         `;
         tbody.appendChild(tr);
     });
 }
 
-// Reset votes
-function resetAllVotes() {
-    if (confirm("Вы действительно хотите сбросить все голоса? Это действие невозможно отменить.")) {
-        candidatesData.forEach(c => c.votes = 0);
-        studentsData.forEach(s => s.hasVoted = false);
-        votesLogData = [];
-        saveDatabase();
-        renderAdminDashboard();
+function resetStudentVote(iin) {
+    const st = students.find(s => s.iin === iin);
+    if (st) {
+        st.hasVoted = false;
+        saveAppState();
+        renderAdminStudentsTable();
         renderDemoChips();
-        alert("Все результаты успешно сброшены!");
+        alert(`Статус ученика с ИИН ${iin} сброшен на "Не голосовал".`);
     }
 }
 
-// Export CSV
 function exportVotesCSV() {
     let csv = "ID,Класс,ФИО,ИИН,Статус_Голосования\n";
-    studentsData.forEach(s => {
+    students.forEach(s => {
         csv += `${s.id},"${s.class}","${s.fullName}",${s.iin},${s.hasVoted ? "Проголосовал" : "Не_голосовал"}\n`;
     });
 
@@ -476,18 +768,16 @@ function exportVotesCSV() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `election_results_${Date.now()}.csv`;
+    a.download = `election_official_report_${Date.now()}.csv`;
     a.click();
 }
 
-// Restore default demo data
-function restoreDemoData() {
-    if (confirm("Восстановить исходную базу данных учеников и кандидатов?")) {
+function restoreDefaultDemoData() {
+    if (confirm("Восстановить заводские демонстрационные данные (4 кандидата, расстановка мест и ученики)?")) {
         localStorage.clear();
-        initDatabase();
-        loadDatabase();
-        renderAdminDashboard();
-        renderDemoChips();
-        alert("Исходные данные успешно восстановлены!");
+        initDatabase(true);
+        loadAppState();
+        renderAll();
+        alert("Заводские данные успешно восстановлены!");
     }
 }

@@ -1,13 +1,22 @@
-// Mock Database for Kazakhstani School Parliament Elections
+// Database & Default Data for Kazakhstani School Parliament Elections
+
+const DEFAULT_SETTINGS = {
+    schoolNameRu: "КГУ «Школа-лицей № 1»",
+    schoolNameKk: "«№ 1 Мектеп-лицейі» КММ",
+    verificationMode: "smart", // "smart" (checks IIN format & uniqueness, adds to DB if new) or "strict" (must be in DB)
+    adminLogin: "admin",
+    adminPass: "admin123"
+};
+
 const DEFAULT_STUDENTS = [
     { id: 1, class: "11А", fullName: "Аманжолов Санжар Ерланович", iin: "070415501234", hasVoted: false },
-    { id: 2, class: "11А", fullName: "Бейсенова Динара Кайратовна", iin: "070822602345", hasVoted: false },
+    { id: 2, class: "11А", fullName: "Бейсенова Динара Кайратовна", iin: "070822602345", hasVoted: true, votedFor: "cand_2" },
     { id: 3, class: "11А", fullName: "Жумабаев Мадияр Русланович", iin: "070211503456", hasVoted: false },
     { id: 4, class: "11Б", fullName: "Касымов Арман Серикович", iin: "071105504567", hasVoted: false },
-    { id: 5, class: "11Б", fullName: "Нурланова Аделина Тимуровна", iin: "070630605678", hasVoted: false },
+    { id: 5, class: "11Б", fullName: "Нурланова Аделина Тимуровна", iin: "070630605678", hasVoted: true, votedFor: "cand_1" },
     { id: 6, class: "10А", fullName: "Оспанов Алдияр Бауыржанович", iin: "080312506789", hasVoted: false },
     { id: 7, class: "10А", fullName: "Сатыбалиева Камила Айдаровна", iin: "080918607890", hasVoted: false },
-    { id: 8, class: "10Б", fullName: "Султанов Темирлан Муратович", iin: "081225508901", hasVoted: false },
+    { id: 8, class: "10Б", fullName: "Султанов Темирлан Муратович", iin: "081225508901", hasVoted: true, votedFor: "cand_2" },
     { id: 9, class: "10Б", fullName: "Талгатова Томирис Данияровна", iin: "080704609012", hasVoted: false },
     { id: 10, class: "9А", fullName: "Утегенов Бекарыс Асылбекович", iin: "090514500123", hasVoted: false },
     { id: 11, class: "9А", fullName: "Шакирова Мадина Армановна", iin: "091028601234", hasVoted: false },
@@ -16,32 +25,34 @@ const DEFAULT_STUDENTS = [
 
 const DEFAULT_CANDIDATES = [
     {
-        id: "cand_1",
-        name: "Алихан Смагулов",
-        class: "11 'А'",
-        motto: "«Знания, Технологии и Справедливость — Школа Будущего!»",
-        photo: "assets/candidate1.jpg",
-        program: [
-            "Создание IT-хаба и VR-лаборатории для учеников",
-            "Организация киберспортивных турниров между классами",
-            "Обновление системы школьного буфета и зон отдыха",
-            "Введение 'Дня без формы' один раз в месяц"
-        ],
-        votes: 14
-    },
-    {
         id: "cand_2",
         name: "Айзере Нургалиева",
         class: "10 'Б'",
         motto: "«Твое время, твой голос, наши совместные победы!»",
         photo: "assets/candidate2.jpg",
+        color: "#00A3E0",
         program: [
-            "Организация благотворительных ярмарок и Эко-субботников",
-            "Клуб дебатов на английском и казахском языках",
-            "Зона релаксации и пуфы в библиотеке для чтения и отдыха",
-            "Система менторства: старшеклассники помогают младшим"
+            "Зона релаксации и пуфы в библиотеке для комфортного отдыха",
+            "Организация ежесезонных благотворительных ярмарок и эко-субботников",
+            "Клуб ораторского мастерства и дебатов на казахском и английском",
+            "Система менторства: старшеклассники помогают младшим классам"
         ],
-        votes: 19
+        votes: 168
+    },
+    {
+        id: "cand_1",
+        name: "Алихан Смагулов",
+        class: "11 'А'",
+        motto: "«Знания, Технологии и Справедливость — Школа Будущего!»",
+        photo: "assets/candidate1.jpg",
+        color: "#E5B80B",
+        program: [
+            "Создание школьного IT-хаба и VR-лаборатории для учеников",
+            "Официальные межклассовые киберспортивные турниры с призами",
+            "Обновление ассортимента школьной столовой и зоны кафетерия",
+            "Введение 'Дня без школьной формы' один раз в месяц"
+        ],
+        votes: 114
     },
     {
         id: "cand_3",
@@ -49,25 +60,44 @@ const DEFAULT_CANDIDATES = [
         class: "11 'Б'",
         motto: "«Движение — жизнь: Спорт, Творчество и Драйв!»",
         photo: "assets/candidate3.jpg",
+        color: "#10B981",
         program: [
-            "Модернизация спортивных секций (футбол, баскетбол, волейбол)",
-            "Ежемесячные творческие вечера и акустические концерты",
-            "Улучшение школьного радио и создание видео-подкаста",
-            "Создание комиссии по защите прав учеников"
+            "Модернизация спортивных секций (футбол, волейбол, баскетбол)",
+            "Ежемесячные творческие вечера, акустические концерты и Open Mic",
+            "Школьное молодежное медиа: еженедельный видео-подкаст",
+            "Комиссия по защите прав учеников и прозрачной связи со школой"
         ],
-        votes: 11
+        votes: 76
+    },
+    {
+        id: "cand_4",
+        name: "Амина Жумабекова",
+        class: "10 'А'",
+        motto: "«Экология, Творчество и Поддержка каждого ученика!»",
+        photo: "assets/candidate4.jpg",
+        color: "#8B5CF6",
+        program: [
+            "Школьный эко-проект по раздельному сбору пластика и макулатуры",
+            "Регулярные арт-выставки ученических работ в холле школы",
+            "Открытие книжного клуба с обменом интересной литературой",
+            "Психологическая почта доверия и дни снятия стресса перед экзаменами"
+        ],
+        votes: 42
     }
 ];
 
-// Initialize database in LocalStorage if empty
-function initDatabase() {
-    if (!localStorage.getItem("school_students_db")) {
-        localStorage.setItem("school_students_db", JSON.stringify(DEFAULT_STUDENTS));
-    }
-    if (!localStorage.getItem("school_candidates_db")) {
+// Initialize database in LocalStorage
+function initDatabase(forceReset = false) {
+    if (forceReset || !localStorage.getItem("school_candidates_db")) {
         localStorage.setItem("school_candidates_db", JSON.stringify(DEFAULT_CANDIDATES));
     }
-    if (!localStorage.getItem("school_votes_log")) {
+    if (forceReset || !localStorage.getItem("school_students_db")) {
+        localStorage.setItem("school_students_db", JSON.stringify(DEFAULT_STUDENTS));
+    }
+    if (forceReset || !localStorage.getItem("school_settings")) {
+        localStorage.setItem("school_settings", JSON.stringify(DEFAULT_SETTINGS));
+    }
+    if (forceReset || !localStorage.getItem("school_votes_log")) {
         localStorage.setItem("school_votes_log", JSON.stringify([]));
     }
 }

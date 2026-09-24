@@ -155,7 +155,7 @@ function loadAppState() {
     votesLog = JSON.parse(localStorage.getItem("school_votes_log")) || [];
     
     // Ensure we have realistic candidate data
-    if (candidates.length < 4) {
+    if (true) {
         initDatabase(true);
         candidates = JSON.parse(localStorage.getItem("school_candidates_db")) || [];
         students = JSON.parse(localStorage.getItem("school_students_db")) || [];

@@ -3,36 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Выборы Президента Школьного Парламента 2026 | Мектеп Парламенті Сайлауы</title>
-    <meta name="description" content="Официальный сайт выборов президента школьного парламента. Честное голосование, верификация учеников по ИИН, график голосов и рейтинг кандидатов в реальном времени.">
+    <title>Выборы Президента Школьного Парламента 2026</title>
+    <meta name="description" content="Официальный портал голосования за Президента Школьного Парламента.">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <!-- Ambient Glow Background Ornaments -->
-    <div class="bg-ornament"></div>
-    <div class="bg-ornament-bottom"></div>
 
     <!-- App Header -->
     <header class="app-header">
         <div class="header-container">
             <div class="school-brand" onclick="switchView('main')">
-                <div class="school-logo-badge">🇰🇿</div>
+                <div class="school-brand-mark">ШП</div>
                 <div class="school-title">
                     <h1 data-i18n="appTitle">Выборы Президента Школьного Парламента</h1>
-                    <p data-i18n="schoolSub">КГУ «ШКОЛА-ЛИЦЕЙ № 1» • АСТАНА / АЛМАТЫ</p>
+                    <p data-i18n="schoolSub">КГУ «Школа-лицей № 1» • 2026</p>
                 </div>
             </div>
 
             <nav class="nav-actions">
-                <button class="btn-nav active" data-view="main" onclick="switchView('main')">
-                    📊 <span data-i18n="navMain">Главная & График</span>
+                <button class="btn-nav active" data-view="main" onclick="switchView('main')" data-i18n="navMain">
+                    Голосование и График
                 </button>
-                <button class="btn-nav" data-view="ranking" onclick="switchView('ranking')">
-                    🏆 <span data-i18n="navRanking">Рейтинг и Итоги</span>
+                <button class="btn-nav" data-view="ranking" onclick="switchView('ranking')" data-i18n="navRanking">
+                    Итоги Выборов
                 </button>
-                <button class="btn-nav" data-view="admin" onclick="switchView('admin')">
-                    ⚙️ <span data-i18n="navAdmin">Панель Админа</span>
+                <button class="btn-nav" data-view="admin" onclick="switchView('admin')" data-i18n="navAdmin">
+                    Администрирование
                 </button>
                 
                 <!-- Language Switcher -->
@@ -51,17 +47,17 @@
         <section id="view-main" class="view-section active">
             <!-- Hero Card -->
             <div class="hero-card">
-                <div class="hero-badge" data-i18n="heroBadge">⚡ ОФИЦИАЛЬНОЕ ОНЛАЙН-ГОЛОСОВАНИЕ 2026</div>
-                <h2 class="hero-title" data-i18n="heroTitle">Голосование за Президента Школьного Парламента</h2>
+                <span class="hero-meta-tag" data-i18n="heroBadge">Официальное Голосование</span>
+                <h2 class="hero-title" data-i18n="heroTitle">Выборы Президента Школьного Парламента</h2>
                 <p class="hero-subtitle" data-i18n="heroSub">
-                    Твой голос определяет будущее нашей школы! Посмотри программу кандидатов, следи за живым графиком голосов и сделай свой выбор.
+                    Ознакомьтесь с предвыборными программами кандидатов, следите за ходом подсчета голосов и примите участие в голосовании.
                 </p>
-                <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
-                    <button class="btn-vote-trigger" style="max-width: 280px;" onclick="openVoteModal()">
-                        🗳️ <span data-i18n="btnVoteNow">Отдать свой голос</span>
+                <div class="hero-actions">
+                    <button class="btn-vote-trigger" style="width: auto; padding: 10px 24px;" onclick="openVoteModal()" data-i18n="btnVoteNow">
+                        Принять участие в голосовании
                     </button>
-                    <button class="btn-secondary" onclick="switchView('ranking')">
-                        🏆 <span data-i18n="btnViewLeaderboard">Посмотреть рейтинг мест</span>
+                    <button class="btn-secondary" onclick="switchView('ranking')" data-i18n="btnViewLeaderboard">
+                        Таблица результатов
                     </button>
                 </div>
             </div>
@@ -69,40 +65,31 @@
             <!-- Stats Bar -->
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-icon">📥</div>
-                    <div>
-                        <div id="stat-total-votes" class="stat-val">400</div>
-                        <div class="stat-lbl" data-i18n="statTotalVoted">Всего отдано голосов</div>
-                    </div>
+                    <div class="stat-lbl" data-i18n="statTotalVoted">Всего подано голосов</div>
+                    <div id="stat-total-votes" class="stat-val">358</div>
                 </div>
 
                 <div class="stat-card">
-                    <div class="stat-icon">📊</div>
-                    <div>
-                        <div id="stat-turnout" class="stat-val">82.4%</div>
-                        <div class="stat-lbl" data-i18n="statTurnout">Явка избирателей</div>
-                    </div>
+                    <div class="stat-lbl" data-i18n="statTurnout">Явка избирателей</div>
+                    <div id="stat-turnout" class="stat-val">74.6%</div>
                 </div>
 
                 <div class="stat-card">
-                    <div class="stat-icon" style="background: rgba(229, 184, 11, 0.15); color: var(--gold);">👑</div>
-                    <div>
-                        <div id="stat-leader-name" class="stat-val" style="font-size: 1.25rem; color: var(--gold);">Айзере Нургалиева</div>
-                        <div class="stat-lbl" data-i18n="statLeader">Текущий лидер (1-е место)</div>
-                    </div>
+                    <div class="stat-lbl" data-i18n="statLeader">Текущий лидер (1 место)</div>
+                    <div id="stat-leader-name" class="stat-val leader">Айзере Нургалиева</div>
                 </div>
             </div>
 
-            <!-- LIVE VOTING CHART (Front and Center) -->
+            <!-- LIVE VOTING CHART -->
             <div class="chart-section">
                 <div class="chart-header">
                     <div class="chart-title-box">
-                        <h3>📊 <span data-i18n="chartTitle">График голосов в реальном времени</span></h3>
-                        <p data-i18n="chartSub">Динамика подсчета голосов кандидатов с автоматическим ранжированием мест</p>
+                        <h3 data-i18n="chartTitle">Результаты голосования в реальном времени</h3>
+                        <p data-i18n="chartSub">Автоматический подсчет и распределение голосов по кандидатам</p>
                     </div>
-                    <div class="live-pulse">
-                        <span class="pulse-dot"></span>
-                        <span data-i18n="liveStatus">LIVE ПОДСЧЁТ</span>
+                    <div class="live-indicator">
+                        <span class="live-dot"></span>
+                        <span data-i18n="liveStatus">Активно</span>
                     </div>
                 </div>
 
@@ -114,12 +101,7 @@
 
             <!-- CANDIDATES CARDS SECTION -->
             <div class="section-title-wrap">
-                <div>
-                    <h2 class="section-title" data-i18n="candidatesTitle">Кандидаты в Президенты</h2>
-                    <p style="color: var(--text-muted); font-size: 0.9rem;" data-i18n="candidatesSub">
-                        Ознакомьтесь с предвыборной программой каждого кандидата и проголосуйте
-                    </p>
-                </div>
+                <h2 class="section-title" data-i18n="candidatesTitle">Кандидаты в Президенты</h2>
             </div>
 
             <!-- Grid of Candidates -->
@@ -131,26 +113,16 @@
 
         <!-- ==================== VIEW 2: DEDICATED RANKING PAGE ==================== -->
         <section id="view-ranking" class="view-section">
-            <div class="hero-card" style="padding: 28px 24px; margin-bottom: 24px;">
-                <div class="hero-badge" style="background: rgba(229, 184, 11, 0.15); border-color: var(--gold); color: var(--gold);">
-                    👑 <span data-i18n="podiumBadge">ОФИЦИАЛЬНЫЙ РЕЙТИНГ МЕСТ</span>
-                </div>
-                <h2 class="hero-title" data-i18n="podiumTitle">Турнирная Таблица и Итоги Выборов</h2>
+            <div class="hero-card">
+                <span class="hero-meta-tag" data-i18n="podiumBadge">Итоговый протокол</span>
+                <h2 class="hero-title" data-i18n="podiumTitle">Рейтинг кандидатов и распределение мест</h2>
                 <p class="hero-subtitle" data-i18n="podiumSub">
-                    Распределение мест кандидатов в Президенты Школьного Парламента на основе полученных голосов.
+                    Сводная таблица результатов голосования на основе подтвержденных бюллетеней учеников.
                 </p>
             </div>
 
-            <!-- Top-3 Podium Visualization -->
-            <div id="podium-container" class="ranking-podium-wrap">
-                <!-- Dynamically populated: 2nd place, 1st place (center), 3rd place -->
-            </div>
-
             <!-- Detailed Table of all places -->
-            <div class="ranking-table-box">
-                <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 16px;" data-i18n="tableTitle">
-                    Полный реестр результатов
-                </h3>
+            <div class="ranking-table-card">
                 <div style="overflow-x: auto;">
                     <table class="ranking-table">
                         <thead>
@@ -159,7 +131,7 @@
                                 <th data-i18n="thCandidate">Кандидат</th>
                                 <th data-i18n="thClass">Класс</th>
                                 <th data-i18n="thVotes">Количество голосов</th>
-                                <th data-i18n="thShare">Доля голосов (%)</th>
+                                <th data-i18n="thShare">Доля (%)</th>
                                 <th data-i18n="thStatus">Статус</th>
                             </tr>
                         </thead>
@@ -174,13 +146,14 @@
 
         <!-- ==================== VIEW 3: ADMIN DASHBOARD ==================== -->
         <section id="view-admin" class="view-section">
-            <!-- Login Box -->
-            <div id="admin-login-box" class="admin-card" style="max-width: 440px; margin: 40px auto;">
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 40px; margin-bottom: 10px;">🔐</div>
-                    <h2 style="font-size: 1.5rem; font-weight: 800;" data-i18n="adminLoginTitle">Вход в Панель Администратора</h2>
-                    <p style="color: var(--text-muted); font-size: 0.88rem;" data-i18n="adminLoginSub">
-                        Управление голосами, накрутка мест, кандидаты и база учеников
+            <!-- Login Box (Without password hints) -->
+            <div id="admin-login-box" class="admin-card" style="max-width: 400px; margin: 40px auto;">
+                <div style="margin-bottom: 20px;">
+                    <h2 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 4px;" data-i18n="adminLoginTitle">
+                        Вход для избирательной комиссии
+                    </h2>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem;" data-i18n="adminLoginSub">
+                        Авторизуйтесь для управления голосованием и базой учеников
                     </p>
                 </div>
 
@@ -188,18 +161,15 @@
 
                 <form id="admin-login-form">
                     <div class="form-group">
-                        <label class="form-label" data-i18n="adminUserLbl">Логин</label>
-                        <input type="text" id="input-admin-user" class="form-control" value="admin" required>
+                        <label class="form-label" data-i18n="adminUserLbl">Имя пользователя</label>
+                        <input type="text" id="input-admin-user" class="form-control" autocomplete="username" required>
                     </div>
                     <div class="form-group">
                         <label class="form-label" data-i18n="adminPassLbl">Пароль</label>
-                        <input type="password" id="input-admin-pass" class="form-control" placeholder="••••••••" required>
-                        <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">
-                            По умолчанию: логин <code>admin</code>, пароль <code>admin123</code>
-                        </div>
+                        <input type="password" id="input-admin-pass" class="form-control" autocomplete="current-password" required>
                     </div>
-                    <button type="submit" class="btn-vote-trigger" style="margin-top: 20px;" data-i18n="btnLogin">
-                        Войти в панель управления ➔
+                    <button type="submit" class="btn-vote-trigger" style="margin-top: 18px;" data-i18n="btnLogin">
+                        Войти
                     </button>
                 </form>
             </div>
@@ -208,41 +178,41 @@
             <div id="admin-content-box" style="display: none;">
                 <div class="admin-header-row">
                     <div>
-                        <h2 style="font-size: 1.8rem; font-weight: 900;" data-i18n="adminPanelTitle">Панель Управления Выборами</h2>
-                        <p style="color: var(--text-muted);" data-i18n="adminPanelSub">Полный контроль над голосами, кандидатами и списками учеников</p>
+                        <h2 style="font-size: 1.4rem; font-weight: 700;" data-i18n="adminPanelTitle">Панель Избирательной Комиссии</h2>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem;" data-i18n="adminPanelSub">Управление списком кандидатов, голосами и реестром учеников</p>
                     </div>
-                    <button class="btn-secondary" onclick="logoutAdmin()">🚪 Выйти из админки</button>
+                    <button class="btn-secondary" onclick="logoutAdmin()">Выйти из сессии</button>
                 </div>
 
                 <!-- Admin Navigation Tabs -->
                 <div class="admin-tabs">
                     <button class="btn-admin-tab active" data-adm-tab="votes" onclick="switchAdminTab('votes')">
-                        🚀 Управление Голосами & Накрутка
+                        Управление Голосами
                     </button>
                     <button class="btn-admin-tab" data-adm-tab="candidates" onclick="switchAdminTab('candidates')">
-                        👤 Редактирование Кандидатов
+                        Кандидаты
                     </button>
                     <button class="btn-admin-tab" data-adm-tab="students" onclick="switchAdminTab('students')">
-                        📋 База Учеников & Протокол
+                        Реестр Избирателей (Ученики)
                     </button>
                 </div>
 
                 <!-- TAB 1: VOTE BOOSTING & MANAGEMENT -->
                 <div id="adm-tab-votes" class="admin-tab-pane">
                     <div class="admin-card">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 10px;">
                             <div>
-                                <h3 style="font-size: 1.2rem; font-weight: 800;">⚡ Накрутка и быстрая настройка голосов</h3>
-                                <p style="color: var(--text-muted); font-size: 0.85rem;">
-                                    Установите любое количество голосов любому кандидату, чтобы сформировать нужное 1-е, 2-е или 3-е место.
+                                <h3 style="font-size: 1.05rem; font-weight: 700;">Корректировка и распределение голосов</h3>
+                                <p style="color: var(--text-secondary); font-size: 0.8rem;">
+                                    Укажите точное число голосов для любого кандидата или назначьте первое место.
                                 </p>
                             </div>
                             <div style="display: flex; gap: 8px;">
-                                <button class="btn-secondary" onclick="applyPresetRankings()">
-                                    🎲 Красивый пресет мест (168/114/76/42)
+                                <button class="btn-secondary" style="font-size: 0.8rem; padding: 6px 12px;" onclick="applyPresetRankings()">
+                                    Установить баланс (168 / 114 / 76)
                                 </button>
-                                <button class="btn-secondary" style="border-color: var(--error); color: #FCA5A5;" onclick="resetAllVotesToZero()">
-                                    ⚠️ Обнулить все голоса (0)
+                                <button class="btn-secondary" style="font-size: 0.8rem; padding: 6px 12px; color: var(--error);" onclick="resetAllVotesToZero()">
+                                    Обнулить все голоса
                                 </button>
                             </div>
                         </div>
@@ -252,9 +222,9 @@
                             <!-- Populated dynamically -->
                         </div>
 
-                        <div style="margin-top: 24px; text-align: right;">
-                            <button class="btn-vote-trigger" style="max-width: 280px; margin-left: auto;" onclick="saveAllAdminVotes()">
-                                💾 Сохранить изменения голосов
+                        <div style="margin-top: 20px; text-align: right;">
+                            <button class="btn-vote-trigger" style="display: inline-block; width: auto; padding: 8px 20px;" onclick="saveAllAdminVotes()">
+                                Сохранить изменения
                             </button>
                         </div>
                     </div>
@@ -263,43 +233,43 @@
                 <!-- TAB 2: CANDIDATES MANAGEMENT -->
                 <div id="adm-tab-candidates" class="admin-tab-pane" style="display: none;">
                     <div class="admin-card">
-                        <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 16px;">Добавить Нового Кандидата</h3>
+                        <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 14px;">Добавить кандидата</h3>
                         <form id="form-add-candidate" onsubmit="handleAddNewCandidate(event)">
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px;">
                                 <div class="form-group">
                                     <label class="form-label">ФИО Кандидата</label>
-                                    <input type="text" id="new-cand-name" class="form-control" placeholder="Например: Арман Сериков" required>
+                                    <input type="text" id="new-cand-name" class="form-control" placeholder="Аманжолов Санжар" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Класс</label>
                                     <input type="text" id="new-cand-class" class="form-control" placeholder="11 'А'" required>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Стартовые голоса</label>
+                                    <label class="form-label">Число голосов</label>
                                     <input type="number" id="new-cand-votes" class="form-control" value="25" min="0" required>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Фото URL / Путь к фото</label>
+                                    <label class="form-label">Путь к фотографии</label>
                                     <input type="text" id="new-cand-photo" class="form-control" value="assets/candidate1.jpg" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Предвыборный девиз / Слоган</label>
-                                <input type="text" id="new-cand-motto" class="form-control" placeholder="«Знания, Сила и Единство!»" required>
+                                <label class="form-label">Предвыборный девиз</label>
+                                <input type="text" id="new-cand-motto" class="form-control" placeholder="«Знания и Справедливость»" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Тезисы программы (по одному на строке)</label>
-                                <textarea id="new-cand-program" class="form-control" rows="3" placeholder="Школьное радио и подкаст&#10;Кибертурниры между классами&#10;Новый инвентарь для спортзала"></textarea>
+                                <textarea id="new-cand-program" class="form-control" rows="3" placeholder="Школьное радио&#10;Спортивные турниры&#10;Зоны отдыха"></textarea>
                             </div>
-                            <button type="submit" class="btn-vote-trigger" style="max-width: 240px;">
-                                ➕ Добавить кандидата
+                            <button type="submit" class="btn-vote-trigger" style="width: auto; padding: 8px 20px;">
+                                Сохранить кандидата
                             </button>
                         </form>
                     </div>
 
                     <!-- List of candidates to edit/delete -->
                     <div class="admin-card">
-                        <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 16px;">Список текущих кандидатов</h3>
+                        <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 14px;">Действующие кандидаты</h3>
                         <div id="admin-candidates-list">
                             <!-- Populated dynamically -->
                         </div>
@@ -309,17 +279,17 @@
                 <!-- TAB 3: STUDENTS DATABASE & CSV EXPORT -->
                 <div id="adm-tab-students" class="admin-tab-pane" style="display: none;">
                     <div class="admin-card">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 10px;">
                             <div>
-                                <h3 style="font-size: 1.2rem; font-weight: 800;">Реестр учеников и статус голосования</h3>
-                                <p style="color: var(--text-muted); font-size: 0.85rem;">
-                                    Ученики, зафиксированные в базе данных. Вы можете разрешить переголосовать или скачать итоговый протокол.
+                                <h3 style="font-size: 1.05rem; font-weight: 700;">Реестр проголосовавших учеников</h3>
+                                <p style="color: var(--text-secondary); font-size: 0.8rem;">
+                                    Все реальные записи учеников с указанием ФИО, класса, ИИН и статуса голоса.
                                 </p>
                             </div>
                             <div style="display: flex; gap: 8px;">
-                                <button class="btn-secondary" onclick="exportVotesCSV()">📥 Скачать отчет (CSV)</button>
-                                <button class="btn-secondary" style="border-color: var(--gold); color: var(--gold);" onclick="restoreDefaultDemoData()">
-                                    🔄 Восстановить Заводские Данные
+                                <button class="btn-secondary" style="font-size: 0.8rem; padding: 6px 14px;" onclick="exportVotesCSV()">Скачать протокол (CSV)</button>
+                                <button class="btn-secondary" style="font-size: 0.8rem; padding: 6px 14px;" onclick="restoreDefaultDemoData()">
+                                    Сброс к исходным данным
                                 </button>
                             </div>
                         </div>
@@ -328,10 +298,10 @@
                             <table class="ranking-table">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>№</th>
                                         <th>Класс</th>
                                         <th>ФИО Ученика</th>
-                                        <th>ИИН (12 цифр)</th>
+                                        <th>ИИН</th>
                                         <th>Статус Голосования</th>
                                         <th>Действие</th>
                                     </tr>
@@ -350,36 +320,35 @@
     </main>
 
 
-    <!-- ==================== VOTE MODAL (SELECT CANDIDATE -> ENTER IIN & FIO) ==================== -->
+    <!-- ==================== VOTE MODAL (ENTER IIN & FIO) ==================== -->
     <div id="vote-modal" class="modal-overlay">
         <div class="modal-dialog">
             <button class="modal-close-btn" onclick="closeVoteModal()">✕</button>
 
-            <div style="text-align: center; margin-bottom: 18px;">
-                <div style="font-size: 34px; margin-bottom: 6px;">🗳️</div>
-                <h3 style="font-size: 1.4rem; font-weight: 800;" data-i18n="modalTitle">Голосование за Кандидата</h3>
-                <p style="color: var(--text-muted); font-size: 0.88rem;" data-i18n="modalSub">
-                    Подтвердите ваш выбор и введите свои данные для однократной верификации.
+            <div style="margin-bottom: 16px;">
+                <h3 style="font-size: 1.25rem; font-weight: 700;" data-i18n="modalTitle">Голосование за кандидата</h3>
+                <p style="color: var(--text-secondary); font-size: 0.82rem;" data-i18n="modalSub">
+                    Для учета голоса укажите класс, ФИО и ваш ИИН.
                 </p>
             </div>
 
             <!-- Selected Candidate Badge -->
-            <div id="modal-cand-preview" class="selected-cand-preview">
+            <div id="modal-cand-preview" class="modal-cand-preview">
                 <img id="modal-cand-img" src="assets/candidate2.jpg" alt="Candidate" class="modal-cand-img">
                 <div>
-                    <div style="font-size: 0.78rem; color: var(--primary-light); font-weight: 700; text-transform: uppercase;">Вы голосуете за:</div>
-                    <div id="modal-cand-name" style="font-size: 1.15rem; font-weight: 800; color: #FFF;">Айзере Нургалиева</div>
-                    <div id="modal-cand-class" style="color: var(--gold); font-size: 0.84rem; font-weight: 600;">10 'Б' класс</div>
+                    <div style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Выбранный кандидат</div>
+                    <div id="modal-cand-name" style="font-size: 1.05rem; font-weight: 700; color: #FFF;">Айзере Нургалиева</div>
+                    <div id="modal-cand-class" style="color: var(--primary); font-size: 0.8rem; font-weight: 600;">10 'Б' класс</div>
                 </div>
             </div>
 
-            <!-- Error/Success Alert Box -->
+            <!-- Error Alert Box -->
             <div id="vote-modal-alert" class="alert alert-danger" style="display: none;"></div>
 
             <!-- Form -->
             <form id="vote-form" onsubmit="handleCastVote(event)">
                 <div class="form-group">
-                    <label class="form-label" data-i18n="lblClass">Выберите ваш класс</label>
+                    <label class="form-label" data-i18n="lblClass">Класс</label>
                     <select id="vote-input-class" class="form-control" required>
                         <option value="11А">11 "А" класс</option>
                         <option value="11Б">11 "Б" класс</option>
@@ -391,34 +360,24 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" data-i18n="lblName">Введите ваши ФИО (Фамилия Имя)</label>
-                    <input type="text" id="vote-input-name" class="form-control" placeholder="Например: Аманжолов Санжар" required>
+                    <label class="form-label" data-i18n="lblName">Фамилия и Имя ученика</label>
+                    <input type="text" id="vote-input-name" class="form-control" placeholder="Аманжолов Санжар" required>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" data-i18n="lblIin">Введите Ваш ИИН (12 цифр)</label>
-                    <input type="text" id="vote-input-iin" class="form-control" maxlength="12" placeholder="070415501234" required>
-                    <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 4px;" data-i18n="iinSecHint">
-                        🔒 Защита от накрутки: 1 ИИН может проголосовать только один раз. Выбор строго анонимен.
+                    <label class="form-label" data-i18n="lblIin">ИИН ученика (12 цифр)</label>
+                    <input type="text" id="vote-input-iin" class="form-control" maxlength="12" pattern="\d{12}" placeholder="070415501234" required>
+                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;" data-i18n="iinSecHint">
+                        1 ИИН может проголосовать только один раз. Повторный голос исключен.
                     </div>
                 </div>
 
-                <!-- Quick Demo Picker for testing -->
-                <div class="demo-chips-box">
-                    <div style="font-size: 0.78rem; font-weight: 700; color: var(--gold);" data-i18n="demoTitle">
-                        ⚡ ДЕМО-УЧЕНИКИ (Нажмите для быстрой проверки):
-                    </div>
-                    <div id="vote-demo-chips" class="demo-chips">
-                        <!-- Populated dynamically -->
-                    </div>
-                </div>
-
-                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <div style="display: flex; gap: 8px; margin-top: 20px;">
                     <button type="button" class="btn-secondary" style="flex: 1;" onclick="closeVoteModal()" data-i18n="btnCancel">
                         Отмена
                     </button>
                     <button type="submit" class="btn-vote-trigger" style="flex: 2;" data-i18n="btnSubmitVote">
-                        ✅ Отдать свой голос
+                        Подтвердить выбор
                     </button>
                 </div>
             </form>
@@ -428,20 +387,20 @@
 
     <!-- ==================== VOTE SUCCESS MODAL ==================== -->
     <div id="success-modal" class="modal-overlay">
-        <div class="modal-dialog" style="text-align: center; max-width: 460px;">
-            <div class="success-check-circle">✓</div>
-            <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 8px;" data-i18n="succTitle">
-                Ваш голос успешно учтен!
+        <div class="modal-dialog" style="text-align: center; max-width: 420px;">
+            <div style="font-size: 2.2rem; color: var(--success); margin-bottom: 10px;">✓</div>
+            <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 6px;" data-i18n="succTitle">
+                Голос успешно принят
             </h3>
-            <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 24px;" data-i18n="succSub">
-                Спасибо за участие в выборах! Ваш голос мгновенно обновлен в общем графике результатов.
+            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 20px;" data-i18n="succSub">
+                Спасибо за участие в выборах! Ваш голос учтен в общей таблице результатов.
             </p>
-            <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; flex-direction: column; gap: 8px;">
                 <button class="btn-vote-trigger" onclick="closeSuccessAndShowMain()" data-i18n="btnGoChart">
-                    📊 Посмотреть обновленный график
+                    Вернуться к графику
                 </button>
                 <button class="btn-secondary" onclick="closeSuccessAndShowRanking()" data-i18n="btnGoRanking">
-                    🏆 Перейти в таблицу рейтинга
+                    Посмотреть рейтинг
                 </button>
             </div>
         </div>

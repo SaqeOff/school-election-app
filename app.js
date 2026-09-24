@@ -146,17 +146,13 @@ document.addEventListener("DOMContentLoaded", () => {
 // Load App State
 function loadAppState() {
     initDatabase();
+    if (localStorage.getItem("school_data_version") !== "2.1") {
+        initDatabase(true);
+    }
     candidates = JSON.parse(localStorage.getItem("school_candidates_db")) || [];
     students = JSON.parse(localStorage.getItem("school_students_db")) || [];
     settings = JSON.parse(localStorage.getItem("school_settings")) || {};
     votesLog = JSON.parse(localStorage.getItem("school_votes_log")) || [];
-
-    // Make sure we have the 3 clean Kazakh candidates
-    if (candidates.length !== 3) {
-        initDatabase(true);
-        candidates = JSON.parse(localStorage.getItem("school_candidates_db")) || [];
-        students = JSON.parse(localStorage.getItem("school_students_db")) || [];
-    }
 }
 
 function saveAppState() {

@@ -1,5 +1,7 @@
 // Database & Default Data for Kazakhstani School Parliament Elections
 
+const APP_DATA_VERSION = "2.1";
+
 const DEFAULT_SETTINGS = {
     schoolNameRu: "КГУ «Школа-лицей № 1»",
     schoolNameKk: "«№ 1 Мектеп-лицейі» КММ",
@@ -71,10 +73,13 @@ const DEFAULT_CANDIDATES = [
     }
 ];
 
-// Initialize database in LocalStorage
+// Initialize database in LocalStorage with automatic version migration
 function initDatabase(forceReset = false) {
-    if (forceReset || !localStorage.getItem("school_candidates_db")) {
+    const isOldVersion = localStorage.getItem("school_data_version") !== APP_DATA_VERSION;
+    
+    if (forceReset || isOldVersion || !localStorage.getItem("school_candidates_db")) {
         localStorage.setItem("school_candidates_db", JSON.stringify(DEFAULT_CANDIDATES));
+        localStorage.setItem("school_data_version", APP_DATA_VERSION);
     }
     if (forceReset || !localStorage.getItem("school_students_db")) {
         localStorage.setItem("school_students_db", JSON.stringify(DEFAULT_STUDENTS));
